@@ -7,8 +7,7 @@ LABEL descriptiom just a weird nginx image
 # stdout  = access, stderr = error
 
 
-RUN     apk update \
-        && apk add git curl wget nano nginx  \ 
+RUN     apk  --update add --no-cache git curl wget nano nginx  \ 
         && ln -sf /dev/stdout /var/log/nginx/access.log \
         && ln -sf /dev/stderr /var/log/nginx/error.log  \
         && mkdir -p /opt/custom_site
