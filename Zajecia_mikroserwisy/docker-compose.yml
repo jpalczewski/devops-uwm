@@ -1,0 +1,40 @@
+version: "3.9"
+   
+services:
+  db:
+    image: postgres:14-alpine
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=2e29917a86a760b1c6b629bd13d812d860b32582451b2cb0f6ce84c8acdcd287b0c7af6f19b143c1dff6669c0e0236ae3f24dc37b73eab560b6c71b3756496a8
+  pgadmin:
+    image: dpage/pgadmin4:6
+    ports:
+      - 10050:80
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+      - ./pgadmin/servers.json:/pgadmin4/servers.json
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=jpalczewski@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=608a92f250a30581063286a2d405ad8201bf4bfdc562543bc051fd6f8da1e844ee6fc2f8a351320b6fe227f10d7289b7fa9457993df3e2d867e986f16ab1da7a
+    
+  django:
+    build:
+      context: car_viewer
+      dockerfile: ./compose/local/django/Dockerfile
+    image: car_viewer_local_django
+    container_name: django
+    depends_on:
+      - db
+    volumes:
+      - ./car_viewer:/app:z
+    env_file:
+      - ./car_viewer/.envs/.local/.django
+    ports:
+      - "8000:8000"
+    command: /start
+
+
+volumes:
+  db_data:
+  pgadmin_data:

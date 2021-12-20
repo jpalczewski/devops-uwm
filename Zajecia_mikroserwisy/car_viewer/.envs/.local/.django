@@ -1,0 +1,10 @@
+# General
+# ------------------------------------------------------------------------------
+USE_DOCKER=yes
+IPYTHONDIR=/app/.ipython
+
+POSTGRES_HOST=db
+POSTGRES_PORT=5432
+POSTGRES_DB=postgres
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=2e29917a86a760b1c6b629bd13d812d860b32582451b2cb0f6ce84c8acdcd287b0c7af6f19b143c1dff6669c0e0236ae3f24dc37b73eab560b6c71b3756496a8
