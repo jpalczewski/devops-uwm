@@ -14,7 +14,6 @@ RUN     apk  --update add --no-cache git curl wget nano nginx  \
 
 
 
-COPY site/* /opt/custom_site
 COPY nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80

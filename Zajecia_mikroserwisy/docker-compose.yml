@@ -23,16 +23,23 @@ services:
       context: car_viewer
       dockerfile: ./compose/local/django/Dockerfile
     image: car_viewer_local_django
-    container_name: django
     depends_on:
       - db
     volumes:
       - ./car_viewer:/app:z
     env_file:
       - ./car_viewer/.envs/.local/.django
-    ports:
-      - "8000:8000"
     command: /start
+  
+  proxy:
+    build:
+      context: nginx
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    ports:
+      - 8080:80
+
 
 
 volumes:
